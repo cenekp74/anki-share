@@ -1,0 +1,25 @@
+.filepond {
+    width: 100%;
+    transition: .1s;
+}
+
+.filepond--root, .filepond--drop-label {
+    height: 80px;
+}
+
+.filepond .filepond--panel-root {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+}
+
+.filepond--drop-label label {
+    color: var(--text-color);
+}
+
+.filepond:hover {
+    scale: 1.004;
+}
+
+.filepond--credits {
+    display: none;
+}

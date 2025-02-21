@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="{{ url_for('static', filename='css/upload.css') }}" rel="stylesheet"/>
+<link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block body %}
+
+<input type="file" 
+    class="filepond"
+    name="filepond" 
+    data-max-files="1">
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}
