@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit="no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v=000">
+    <meta property="og:image" content="/favicon.ico"> <!-- OpenGraph -->
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }} <i onclick="setParentDisplayNone(this)" class="fa fa-xmark"></i>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block body %}
+        {% endblock %}
+    </div>
+    <footer>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

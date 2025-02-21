@@ -1,0 +1,20 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+margin: 0;
+}
+
+:root {
+    --bg-color: hsl(100, 40%, 7%);
+    --secondary-color: hsl(220, 70%, 40%);
+    --text-color: hsl(100, 20%, 90%);
+}
+
+body {
+    line-height: 1.25;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
