@@ -1,18 +1,23 @@
+.deck-column {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 .deck-body {
     display: flex;
     justify-content: center;
 }
 
 .card {
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
     height: 35vh;
     max-height: 350px;
     min-height: 200px;
     background-color: var(--card-color);
     border-radius: var(--border-radius);
     padding: 16px;
-    margin: 8px;
+    margin: 8px 0;
     position: relative;
     display: none;
     cursor: pointer;
@@ -49,12 +54,9 @@
 }
 
 .deck-nav {
-    width: 90%;
-    max-width: 600px;
     display: flex;
     justify-content: space-between;
-    padding: 16px;
-    margin: 0 auto;
+    padding: 16px 0;
 }
 
 .deck-nav div.button {
@@ -86,10 +88,4 @@
 body :has(.card.flipped) .card-nav {
     pointer-events: all;
     opacity: 1;
-}
-
-.deck-info {
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
 }
