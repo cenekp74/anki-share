@@ -7,6 +7,7 @@
 .deck-body {
     display: flex;
     justify-content: center;
+    perspective: 1200px;
 }
 
 .card {
@@ -14,8 +15,6 @@
     height: 35vh;
     max-height: 350px;
     min-height: 200px;
-    background-color: var(--card-color);
-    border-radius: var(--border-radius);
     padding: 16px;
     margin: 8px 0;
     position: relative;
@@ -23,34 +22,34 @@
     cursor: pointer;
     font-size: 1.5rem;
     text-align: center;
+    transition: transform .4s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped {
+    transform: rotateX(180deg);
 }
 
 .card > div {
     width: 100%;
     height: 100%;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
 }
 
 .card.active {
     display: block;
 }
 
-.card .card-front {
-    display: flex;
-}
-
 .card .card-back {
-    display: none;
-}
-
-.card.flipped .card-back {
-    display: flex;
-}
-
-.card.flipped .card-front {
-    display: none;
+    transform: rotateX(180deg);
 }
 
 .deck-nav {
