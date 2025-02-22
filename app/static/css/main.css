@@ -37,7 +37,7 @@ a:hover {
 .navbar {
     display: flex;
     align-items: baseline;
-    padding: 20px 16px;
+    padding: 20px 16px 8px;
     gap: 16px;
     font-family: 'Consolas', 'Inconsolata', 'Lucida Console', 'Roboto', 'Liberation Mono', monospace;;
 }
@@ -56,5 +56,11 @@ a:hover {
 .content {
     width: 50vw;
     min-width: min(400px, 95vw);
-    margin: 64px auto 0;
+    margin: 32px auto 0;
+}
+
+p {
+    margin: 12px 0;
+    font-size: 1.2rem;
+    line-height: 1.55rem;
 }

@@ -8,10 +8,43 @@
 
 {% block body %}
 
+<h1>anki-share</h1>
+<p>
+    <a href="url_for('index')"><b>anki-share</b></a> provides a simple way to <b>share Anki decks</b>. <br>
+    Normally, sharing decks can be quite frustrating - most people don't use anki and
+    don't like the idea of installing it just to view a few flashcards. And of course there is <a target="_blank" href="https://ankiweb.net">ankiweb</a>, 
+    but it requires an account and you cannot import local decks. As a result, it is almost impossible to share your amazing Anki cards with someone that
+    doesn't use anki. 
+</p>
+<p>
+    Anki-share takes care of this problem. You simply upload the Anki deck and share the generated url with anyone. They will then be able to view the deck from any 
+    web browser - be it on a computer, tablet or mobile phone. They won't be able to use all the advance features Anki has to offer, but for a quick learning session, 
+    it's perfect!
+</p>
+<h3>
+    <b>To share your Anki deck, export it and upload the .apkg file below. </b>
+</h3>
+
 <input type="file" 
     class="filepond"
     name="filepond" 
     data-max-files="1">
+
+<h2>How does it work?</h2>
+<p>
+    After uploading the deck, it will be processed and saved on the server. You will be automatically redirected to a page where you can view the deck,
+    browse and practice the cards or download the original .apkg file. You can share this url with anyone, they will also be able to view your deck. 
+</p>
+<h2>About</h2>
+<p>
+    <b>author</b>: Cenek Potuznik (<a href="https://potuznik.dev">potuznik.dev</a>)<br>
+    <b>source code</b>: <a target="_blank" href="https://github.com/cenekp74/anki-share">github</a>
+</p>
+<p>
+    If you experience any problems when using anki-share or have a suggestion on how to make it better, please contact me at 
+    <a href="mailto:anki-share@potuznik.dev">anki-share@potuznik.dev</a>
+</p>
+
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
 {% endblock %}
