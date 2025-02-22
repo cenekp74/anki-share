@@ -1,9 +1,10 @@
-from app import app
+from app import app, db
 from flask import flash, render_template, redirect, url_for, jsonify, abort, request, send_file, send_from_directory
 from werkzeug.utils import secure_filename
 from .utils import random_hex_token
 from .celery_tasks import start_deck_processing
 import os
+from .db_classes import Deck
 
 @app.route('/favicon.ico')
 def send_favicon():
@@ -30,5 +31,10 @@ def upload():
     file.save(f"instance/decks/{deck_id}/anki/deck.apkg")
 
     start_deck_processing.delay(deck_id)
-
+    deck = Deck(
+        id = deck_id,
+        name = filename.removesuffix(".apkg").replace("_", " ")
+    )
+    db.session.add(deck)
+    db.session.commit()
     return deck_id

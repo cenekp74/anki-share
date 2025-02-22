@@ -1,5 +1,7 @@
 from flask import Flask
 from celery import Celery, Task
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -9,7 +11,7 @@ app.config["CELERY"] = dict(
         task_ignore_result=True,
     )
 app.config.from_pyfile('../instance/config.py')
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 def celery_init_app(app: Flask) -> Celery:
     class FlaskTask(Task):
@@ -25,5 +27,7 @@ def celery_init_app(app: Flask) -> Celery:
     return celery_app
 
 celery_app = celery_init_app(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from app import routs
