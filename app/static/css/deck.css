@@ -4,8 +4,11 @@
 }
 
 .card {
-    width: 80%;
-    height: 200px;
+    width: 90%;
+    max-width: 600px;
+    height: 35vh;
+    max-height: 350px;
+    min-height: 200px;
     background-color: var(--card-color);
     border-radius: var(--border-radius);
     padding: 16px;
@@ -13,6 +16,8 @@
     position: relative;
     display: none;
     cursor: pointer;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .card > div {
@@ -42,7 +47,8 @@
 }
 
 .deck-nav {
-    width: 70%;
+    width: 90%;
+    max-width: 600px;
     display: flex;
     justify-content: space-between;
     padding: 16px;
@@ -68,10 +74,14 @@
 }
 
 .card-nav {
-    display: none;
-    gap: 32px;
+    pointer-events: none;
+    display: flex;
+    gap: 16px;
+    opacity: .5;
+    transition: opacity .14s;
 }
 
 body :has(.card.flipped) .card-nav {
-    display: flex;
+    pointer-events: all;
+    opacity: 1;
 }

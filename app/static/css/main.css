@@ -20,6 +20,7 @@ body {
     -webkit-font-smoothing: antialiased;
     background-color: var(--bg-color);
     color: var(--text-color);
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .content {
