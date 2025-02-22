@@ -5,21 +5,27 @@ from enum import Enum
 import sqlite3
 from flask import render_template
 from app import app
-
+import time
 class ProcessingStatus(Enum):
-    STARTING_CONVERSION = 0
-    UNZIPPING_ARCHIVE = 1
-    GENERATING_HTML = 2
-    COMPLETED = 3
+    IN_QUEUE = 0
+    STARTING_PROCESSING = 1
+    UNZIPPING_ARCHIVE = 2
+    GENERATING_HTML = 3
+    COMPLETED = 4
     ERROR_COLLECTION_ANKI21_MISSING = 41
     ERROR_NOTES_MISSING = 42
+
+    def error(self):
+        if self.value >= 40:
+            return True
+        return False
 
 def write_to_status_file(deck_id, status: ProcessingStatus):
     with open(f"instance/decks/{deck_id}/processing_status.txt", "w") as f:
         f.write(str(status.value))
 
 def process_deck(deck_id: str):
-    write_to_status_file(deck_id, ProcessingStatus.STARTING_CONVERSION)
+    write_to_status_file(deck_id, ProcessingStatus.STARTING_PROCESSING)
     deck_path = f"instance/decks/{deck_id}"
     write_to_status_file(deck_id, ProcessingStatus.UNZIPPING_ARCHIVE)
     unzip_file(f"{deck_path}/anki", "deck.apkg")
@@ -33,6 +39,7 @@ def process_deck(deck_id: str):
     notes = cur.execute("SELECT flds FROM notes")
     if not notes:
         write_to_status_file(deck_id, ProcessingStatus.ERROR_NOTES_MISSING)
+        return False
     cards = []
     for note in notes:
         front, back = note[0].split("\x1f")
