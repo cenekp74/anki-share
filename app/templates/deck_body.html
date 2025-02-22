@@ -1,6 +1,6 @@
 {% for card in cards %}
-<div>
-    <div>{{ card.front | safe }}</div>
-    <div>{{ card.back | safe }}</div>
+<div class="card">
+    <div class="card-front">{{ card.front | safe }}</div>
+    <div class="card-back">{{ card.back | safe }}</div>
 </div>
 {% endfor %}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/deck.css') }}?v=000">
 {% endblock %}
 
 
@@ -11,8 +12,14 @@
     An error occured when processing your anki deck: {{ error }}
 </div>
 {% endif %}
+
 <div class="deck-body">
     {{ deck_body | safe }}
 </div>
+<div class="deck-nav">
+    <div class="prev-button"><i class="fa-solid fa-arrow-left"></i></div>
+    <div class="next-button"><i class="fa-solid fa-arrow-right"></i></div>
+</div>
 
+<script src="{{ url_for('static', filename='js/deck.js') }}?v=000"></script>
 {% endblock %}
