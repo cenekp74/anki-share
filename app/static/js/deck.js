@@ -34,6 +34,9 @@ function correct() {
     getCurrentCardEle().classList.remove("active")
     getCurrentCardEle().classList.remove("flipped")
     window.cards.splice(window.currentCard, 1)
+    if (window.currentCard == window.cards.length) {
+        window.currentCard = 0
+    }
     changeCurrentCard(window.currentCard)
 }
 
