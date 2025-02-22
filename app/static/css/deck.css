@@ -1,3 +1,8 @@
+.deck-body {
+    display: flex;
+    justify-content: center;
+}
+
 .card {
     width: 80%;
     height: 200px;
@@ -7,6 +12,7 @@
     margin: 8px;
     position: relative;
     display: none;
+    cursor: pointer;
 }
 
 .card > div {
@@ -19,16 +25,20 @@
     display: block;
 }
 
+.card .card-front {
+    display: block;
+}
+
 .card .card-back {
-    display: block; 
+    display: none;
 }
 
 .card.flipped .card-back {
-    display: block; 
+    display: block;
 }
 
 .card.flipped .card-front {
-    display: none; 
+    display: none;
 }
 
 .deck-nav {
@@ -38,7 +48,7 @@
     padding: 16px;
 }
 
-.deck-nav > div {
+.deck-nav div.button {
     border-radius: 100%;
     border: 2px solid var(--text-color);
     padding: 4px;
@@ -48,4 +58,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    transition: .14s background-color;
+}
+
+.deck-nav div.button:hover {
+    background-color: var(--button-hover-color);
 }

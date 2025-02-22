@@ -1,5 +1,5 @@
 {% for card in cards %}
-<div class="card">
+<div class="card" id="card-{{ loop.index }}">
     <div class="card-front">{{ card.front | safe }}</div>
     <div class="card-back">{{ card.back | safe }}</div>
 </div>
