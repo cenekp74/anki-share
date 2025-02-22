@@ -14,7 +14,7 @@ def send_favicon():
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html")
+    return redirect(url_for('upload'))
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
