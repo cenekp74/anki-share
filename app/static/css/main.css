@@ -13,6 +13,8 @@ margin: 0;
     --text-color: hsl(100, 20%, 90%);
     --button-hover-color: hsla(100, 20%, 70%, 0.3);
     --border-radius: 10px;
+    --link-color: hsl(220, 20%, 90%);
+    --link-hover-color: hsl(220, 60%, 70%);
 }
 
 body {
@@ -21,6 +23,34 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: var(--link-color);
+    transition: color .14s;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+.navbar {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 16px;
+    gap: 16px;
+    font-family: 'Consolas', 'Inconsolata', 'Lucida Console', 'Roboto', 'Liberation Mono', monospace;;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-size: 1.25rem;
+}
+
+.navbar .heading {
+    font-size: 1.75rem;
+    font-weight: bold;
+    padding: 8px 1vw;
 }
 
 .content {
