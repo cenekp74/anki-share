@@ -7,9 +7,9 @@ margin: 0;
 }
 
 :root {
-    --bg-color: hsl(100, 40%, 7%);
+    --bg-color: hsl(100, 40%, 6%);
     --secondary-color: hsl(220, 70%, 40%);
-    --card-color: var(--secondary-color);
+    --card-color: hsl(100, 40%, 14%);
     --text-color: hsl(100, 20%, 90%);
     --button-hover-color: hsla(100, 20%, 70%, 0.3);
     --border-radius: 10px;
