@@ -56,7 +56,7 @@ def deck(deck_id):
 
     if status is ProcessingStatus.COMPLETED:
         deck_body = open(f"{deck_path}/deck_body.html", "r", encoding="utf-8").read()
-        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name)
+        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id)
     
     if status.error():
         error = "Unexpected server error"
@@ -66,3 +66,13 @@ def deck(deck_id):
             error = "No notes were found in your apkg file. Please make sure that there are cards in the deck. Only 2 filed cards with text/images are supported."
         return render_template("deck.html", error=error)
     return render_template("deck.html", deck_body="Your deck is currently being processed. It should take no longer then a few minutes. Please reload to page to update.")
+
+@app.route('/deck/<deck_id>/download')
+def download_deck(deck_id):
+    if not is_valid_deck_id(deck_id): abort(400)
+    deck = Deck.query.get(deck_id)
+    if not deck: abort(400)
+
+    deck_path = f"instance/decks/{deck.id}"
+    if not os.path.exists(f"{deck_path}/anki/deck.apkg"): abort(400)
+    return send_file(f"../{deck_path}/anki/deck.apkg", download_name=f"{deck.name}.apkg")

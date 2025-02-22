@@ -11,12 +11,14 @@
 <div class="deck-processing-error">
     An error occured when processing your anki deck: {{ error }}
 </div>
-{% endif %}
-
+{% else %}
 <div class="deck-column">
     <div class="deck-info">
         <h1>{{ deck_name }}</h1>
         <div class="deck-status"></div>
+        <a href="{{ url_for('download_deck', deck_id=deck_id) }}" class="deck-download-button" title="Download .apkg">
+            <i class="fa-solid fa-download"></i>
+        </a>
     </div>
     <div class="deck-body" title="Flip card">
         {{ deck_body | safe }}
@@ -30,6 +32,7 @@
         <div class="next-button button" title="Next card"><i class="fa-solid fa-arrow-right"></i></div>
     </div>
 </div>
+{% endif %}
 
 <script src="{{ url_for('static', filename='js/deck.js') }}?v=000"></script>
 {% endblock %}
