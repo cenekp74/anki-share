@@ -12,6 +12,7 @@ function changeCurrentCard(card_index) {
     card = window.cards[card_index] 
     if (!card) return
     card.classList.add("active")
+    updateDeckStatus()
 }
 
 function nextCard() {
@@ -43,6 +44,10 @@ function incorrect() {
 
 function flipCurrentCard() {
     getCurrentCardEle().classList.toggle("flipped")
+}
+
+function updateDeckStatus() {
+    document.querySelector(".deck-status").innerHTML = `${window.currentCard+1}/${window.cards.length}`
 }
 
 document.addEventListener("DOMContentLoaded", () => {

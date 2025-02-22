@@ -56,7 +56,7 @@ def deck(deck_id):
 
     if status is ProcessingStatus.COMPLETED:
         deck_body = open(f"{deck_path}/deck_body.html", "r", encoding="utf-8").read()
-        return render_template("deck.html", deck_body=deck_body)
+        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name)
     
     if status.error():
         error = "Unexpected server error"

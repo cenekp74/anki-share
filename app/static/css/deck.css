@@ -16,7 +16,7 @@
     position: relative;
     display: none;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -24,6 +24,8 @@
     width: 100%;
     height: 100%;
     display: none;
+    justify-content: center;
+    align-items: center;
 }
 
 .card.active {
@@ -31,7 +33,7 @@
 }
 
 .card .card-front {
-    display: block;
+    display: flex;
 }
 
 .card .card-back {
@@ -39,7 +41,7 @@
 }
 
 .card.flipped .card-back {
-    display: block;
+    display: flex;
 }
 
 .card.flipped .card-front {
@@ -84,4 +86,10 @@
 body :has(.card.flipped) .card-nav {
     pointer-events: all;
     opacity: 1;
+}
+
+.deck-info {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
 }
