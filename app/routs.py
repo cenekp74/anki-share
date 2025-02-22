@@ -1,7 +1,8 @@
 from app import app
 from flask import flash, render_template, redirect, url_for, jsonify, abort, request, send_file, send_from_directory
 from werkzeug.utils import secure_filename
-from app.utils import random_hex_token
+from .utils import random_hex_token
+from .celery_tasks import start_deck_processing
 import os
 
 @app.route('/favicon.ico')
@@ -22,10 +23,12 @@ def upload():
     filename = secure_filename(file.filename)
     if not filename.endswith(".apkg"):
         abort(400)
-    token = random_hex_token()
+    deck_id = random_hex_token()
     
-    os.mkdir(f"instance/decks/{token}")
-    os.mkdir(f"instance/decks/{token}/anki")
-    file.save(f"instance/decks/{token}/anki/deck.apkg")
+    os.mkdir(f"instance/decks/{deck_id}")
+    os.mkdir(f"instance/decks/{deck_id}/anki")
+    file.save(f"instance/decks/{deck_id}/anki/deck.apkg")
 
-    return token
+    start_deck_processing.delay(deck_id)
+
+    return deck_id
