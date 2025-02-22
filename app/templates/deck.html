@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+
+{% if error %}
+<div class="deck-processing-error">
+    An error occured when processing your anki deck: {{ error }}
+</div>
+{% endif %}
+<div class="deck-body">
+    {{ deck_body | safe }}
+</div>
+
+{% endblock %}

@@ -21,5 +21,5 @@ FilePond.create(
 document.querySelector(".filepond").addEventListener("FilePond:processfile", (e) => {
     if (e.detail.error) return
     let response = e.detail.file.serverId
-    
+    window.location.href = "/deck/"+response
 })
