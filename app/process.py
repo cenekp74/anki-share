@@ -5,7 +5,7 @@ from enum import Enum
 import sqlite3
 from flask import render_template
 from app import app
-import time
+
 class ProcessingStatus(Enum):
     IN_QUEUE = 0
     STARTING_PROCESSING = 1
