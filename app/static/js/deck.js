@@ -3,10 +3,9 @@ function getCurrentCardEle() {
 }
 
 function changeCurrentCard(card_index) {
-    prevCard = getCurrentCardEle()
-    if (prevCard) {
-        prevCard.classList.remove("active")
-        prevCard.classList.remove("flipped")
+    if (getCurrentCardEle()) {
+        getCurrentCardEle().classList.remove("active")
+        getCurrentCardEle().classList.remove("flipped")
     }
     window.currentCard = card_index
     card = window.cards[card_index] 
@@ -60,5 +59,26 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".prev-button").addEventListener("click", prevCard)
     document.querySelector(".correct-button").addEventListener("click", correct)
     document.querySelector(".incorrect-button").addEventListener("click", incorrect)
+    document.addEventListener("keydown", (e) => {
+        switch (e.key) {
+            case "ArrowLeft":
+                prevCard()
+                break
+            case "ArrowRight":
+                nextCard()
+                break
+            case "1":
+                if (getCurrentCardEle().classList.contains("flipped")) incorrect()
+                else flipCurrentCard()
+                break
+            case "2":
+                if (getCurrentCardEle().classList.contains("flipped")) correct()
+                else flipCurrentCard()
+                break
+            case " ":
+                flipCurrentCard()
+                break
+        }
+    })
     changeCurrentCard(0)
 })
