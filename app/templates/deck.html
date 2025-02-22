@@ -18,16 +18,16 @@
         <h1>{{ deck_name }}</h1>
         <div class="deck-status"></div>
     </div>
-    <div class="deck-body">
+    <div class="deck-body" title="Flip card">
         {{ deck_body | safe }}
     </div>
     <div class="deck-nav">
-        <div class="prev-button button"><i class="fa-solid fa-arrow-left"></i></div>
+        <div class="prev-button button" title="Previous card"><i class="fa-solid fa-arrow-left"></i></div>
         <div class="card-nav">
-            <div class="incorrect-button button"><i class="fa-solid fa-xmark"></i></div>
-            <div class="correct-button button"><i class="fa-solid fa-check"></i></div>
+            <div class="incorrect-button button" title="Still learning"><i class="fa-solid fa-xmark"></i></div>
+            <div class="correct-button button" title="Know - eliminate card"><i class="fa-solid fa-check"></i></div>
         </div>
-        <div class="next-button button"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="next-button button" title="Next card"><i class="fa-solid fa-arrow-right"></i></div>
     </div>
 </div>
 
