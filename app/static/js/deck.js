@@ -84,4 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
     changeCurrentCard(0)
+    document.querySelector(".share-deck-button").addEventListener("click", () => {
+        if (navigator.share) {
+            navigator.share({
+                title: `anki-share deck - ${document.querySelector(".deck-info > h1").innerHTML}`,
+                url: window.location.href
+            })
+        }
+    })
 })

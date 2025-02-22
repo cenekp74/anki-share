@@ -104,10 +104,12 @@ body :has(.card.flipped) .card-nav {
     position: relative;
 }
 
-.deck-download-button {
+.deck-options {
     position: absolute;
     top: 4px;
     right: 4px;
     color: var(--text-color);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    display: flex;
+    gap: 12px;
 }

@@ -16,9 +16,14 @@
     <div class="deck-info">
         <h1>{{ deck_name }}</h1>
         <div class="deck-status"></div>
-        <a href="{{ url_for('download_deck', deck_id=deck_id) }}" class="deck-download-button" title="Download .apkg">
-            <i class="fa-solid fa-download"></i>
-        </a>
+        <div class="deck-options">
+            <a href="#" class="share-deck-button" title="Copy the website url to share the deck">
+                <i class="fa-solid fa-share-nodes"></i>
+            </a>
+            <a href="{{ url_for('download_deck', deck_id=deck_id) }}" class="deck-download-button" title="Download .apkg">
+                <i class="fa-solid fa-download"></i>
+            </a>
+        </div>
     </div>
     <div class="deck-body" title="Flip card">
         {{ deck_body | safe }}
