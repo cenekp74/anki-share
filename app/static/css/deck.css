@@ -1,6 +1,6 @@
 .deck-column {
-    width: 90%;
-    max-width: 600px;
+    width: 95%;
+    max-width: 650px;
     margin: 0 auto;
 }
 
@@ -12,9 +12,10 @@
 
 .card {
     width: 100%;
-    height: 35vh;
-    max-height: 350px;
+    height: 40vh;
+    max-height: 400px;
     min-height: 200px;
+    min-width: 200px;
     padding: 16px;
     margin: 8px 0;
     position: relative;
@@ -33,7 +34,9 @@
 .card > div {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -42,6 +45,7 @@
     backface-visibility: hidden;
     background-color: var(--card-color);
     border-radius: var(--border-radius);
+    padding: 8px;
 }
 
 .card.active {
@@ -55,6 +59,8 @@
 .card img {
     max-height: 96%;
     max-width: 96%;
+    height: auto;
+    width: auto;
 }
 
 .deck-nav {
