@@ -76,3 +76,10 @@ def download_deck(deck_id):
     deck_path = f"instance/decks/{deck.id}"
     if not os.path.exists(f"{deck_path}/anki/deck.apkg"): abort(400)
     return send_file(f"../{deck_path}/anki/deck.apkg", download_name=f"{deck.name}.apkg")
+
+@app.route('/deck/<deck_id>/media/<filename>')
+def send_deck_media(deck_id, filename):
+    if not is_valid_deck_id(deck_id): abort(400)
+    deck = Deck.query.get(deck_id)
+    if not deck: abort(400)
+    return send_from_directory(f"../instance/decks/{deck.id}/media", filename)

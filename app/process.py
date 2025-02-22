@@ -5,13 +5,15 @@ from enum import Enum
 import sqlite3
 from flask import render_template
 from app import app
+import json
 
 class ProcessingStatus(Enum):
     IN_QUEUE = 0
     STARTING_PROCESSING = 1
     UNZIPPING_ARCHIVE = 2
     GENERATING_HTML = 3
-    COMPLETED = 4
+    PROCESSING_MEDIA = 4
+    COMPLETED = 20
     ERROR_COLLECTION_ANKI21_MISSING = 41
     ERROR_NOTES_MISSING = 42
 
@@ -48,6 +50,15 @@ def process_deck(deck_id: str):
             "back":back,
         })
     html = render_template("deck_body.html", cards=cards)
+
+    write_to_status_file(deck_id, ProcessingStatus.PROCESSING_MEDIA)
+    os.makedirs(f"{deck_path}/media", exist_ok=True)
+    images_json = json.load(open(f"{deck_path}/anki/media"))
+    for filename, image_name in images_json.items():
+        if not os.path.exists(f"{deck_path}/anki/{filename}"): continue
+        shutil.move(f"{deck_path}/anki/{filename}", f"{deck_path}/media/{filename}")
+        html = html.replace(image_name, f"/deck/{deck_id}/media/{filename}")
+        
     with open(f"{deck_path}/deck_body.html", "w", encoding="utf-8") as f:
         f.write(html)
     write_to_status_file(deck_id, ProcessingStatus.COMPLETED)
