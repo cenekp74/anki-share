@@ -16,6 +16,7 @@ class ProcessingStatus(Enum):
     COMPLETED = 20
     ERROR_COLLECTION_ANKI21_MISSING = 41
     ERROR_NOTES_MISSING = 42
+    ERROR_PROCESSING_NOTES = 43
 
     def error(self):
         if self.value >= 40:
@@ -42,13 +43,17 @@ def process_deck(deck_id: str):
     if not notes:
         write_to_status_file(deck_id, ProcessingStatus.ERROR_NOTES_MISSING)
         return False
-    cards = []
-    for note in notes:
-        front, back = note[0].split("\x1f")
-        cards.append({
-            "front":front,
-            "back":back,
-        })
+    try:
+        cards = []
+        for note in notes:
+            front, back = note[0].split("\x1f")
+            cards.append({
+                "front":front,
+                "back":back,
+            })
+    except Exception as _e:
+        write_to_status_file(deck_id, ProcessingStatus.ERROR_PROCESSING_NOTES)
+        return False
     html = render_template("deck_body.html", cards=cards)
 
     write_to_status_file(deck_id, ProcessingStatus.PROCESSING_MEDIA)
