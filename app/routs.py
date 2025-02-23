@@ -65,7 +65,7 @@ def deck(deck_id):
         elif status is ProcessingStatus.ERROR_NOTES_MISSING:
             error = "No notes were found in your apkg file. Please make sure that there are cards in the deck. Only 2 filed cards with text/images are supported."
         elif status is ProcessingStatus.ERROR_PROCESSING_NOTES:
-            error = "An error occured while processing your deck. Currently only decks with 2 basic fields are supported. Sorry for the inconvenience."
+            error = "'fields parsing error' Currently only decks with 2 basic fields are supported. Sorry for the inconvenience."
         return render_template("deck.html", error=error)
     return render_template("deck.html", deck_body="Your deck is currently being processed. It should take no longer then a few minutes. Please reload to page to update.")
 
