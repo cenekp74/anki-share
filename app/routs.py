@@ -61,7 +61,7 @@ def deck(deck_id):
     if status.error():
         error = "Unexpected server error"
         if status is ProcessingStatus.ERROR_COLLECTION_ANKI21_MISSING:
-            error = "collection.anki21 not found in apkg. Please make sure that you are uploading an anki deck for anki version >= 2.1."
+            error = "collection.anki21 not found in apkg. Please check the box 'Support older Anki versions' when exporting the deck."
         elif status is ProcessingStatus.ERROR_NOTES_MISSING:
             error = "No notes were found in your apkg file. Please make sure that there are cards in the deck. Only 2 filed cards with text/images are supported."
         elif status is ProcessingStatus.ERROR_PROCESSING_NOTES:
