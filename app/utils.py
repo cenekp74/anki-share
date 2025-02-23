@@ -1,6 +1,6 @@
 from . import app
 import random
-import shutil
+import zipfile
 import os
 
 def random_hex_token(length=16):
@@ -19,4 +19,10 @@ def unzip_file(path, zip_filename) -> None:
     """
     unpacks zip file to its parent directory
     """
-    shutil.unpack_archive(os.path.join(path, zip_filename), path, "zip")
+    zip_path = os.path.join(path, zip_filename)
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        for member in zip_ref.namelist():
+            member_path = os.path.abspath(os.path.join(path, member))
+            if not member_path.startswith(os.path.abspath(path) + os.sep):
+                raise Exception("Unsafe file path detected")
+        zip_ref.extractall(path)

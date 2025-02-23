@@ -17,6 +17,7 @@ class ProcessingStatus(Enum):
     ERROR_COLLECTION_ANKI21_MISSING = 41
     ERROR_NOTES_MISSING = 42
     ERROR_PROCESSING_NOTES = 43
+    ERROR_UNPACKING_ARCHIVE = 44
 
     def error(self):
         if self.value >= 40:
@@ -31,7 +32,11 @@ def process_deck(deck_id: str):
     write_to_status_file(deck_id, ProcessingStatus.STARTING_PROCESSING)
     deck_path = f"instance/decks/{deck_id}"
     write_to_status_file(deck_id, ProcessingStatus.UNZIPPING_ARCHIVE)
-    unzip_file(f"{deck_path}/anki", "deck.apkg")
+    try:
+        unzip_file(f"{deck_path}/anki", "deck.apkg")
+    except Exception as e:
+        write_to_status_file(deck_id, ProcessingStatus.ERROR_UNPACKING_ARCHIVE)
+        return False
 
     write_to_status_file(deck_id, ProcessingStatus.GENERATING_HTML)
     if not os.path.exists(f"{deck_path}/anki/collection.anki21"):
