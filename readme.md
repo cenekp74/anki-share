@@ -24,3 +24,17 @@ It sends the cards to template `deck_body.html` and saves the generated html.
 After that, the function reads `media` file inside anki folder. It moves all media files to `/media` and renames them accordingly inside the html. 
 
 After upload, user gets redirected to `/deck/<deck_id>`. The `deck` function in `routs.py` checks if the deck exists in database. It then checks the processing status in `processing_status.txt`. If the processing is completed, it reads the `deck_body.html` file inside the deck folder and sends it to `deck.html` template, which is displayed to the user. If the processing is not completed, it shows the user either error of processing in progress message. 
+
+### process_deck logic
+The logic of `process_deck` function in `process.py`
+1. unzip .apkg file
+2. check if `collection.anki21b` exists
+- if it does, that means the deck if from a newer version
+- decks from newer versions are compressed uzing zstd and serialized using protocol buffers
+3. if `collection.anki21b` exists, decompress it to `collection.anki21` using `decompress_pyzstd` function form `utils.py`
+4. read notes from `collection.anki21` sqlite database
+5. generate deck html using template `deck_body.html`
+6. read `media` file into a dict
+- if the deck is from new anki versions, the `media` file is serialized using protocol buffers. it has to be processed with `import_export_pb2.py`. the files in anki_proto directory have been generated using protoc (https://protobuf.dev/getting-started/pythontutorial/)
+7. move all media files to media directory and replace the references in html
+8. if the deck is from a new anki versions, the media files also have to be decompressed using `decompress_pyzstd`
