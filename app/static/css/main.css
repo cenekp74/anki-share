@@ -57,6 +57,7 @@ a:hover {
 .content {
     width: 70vw;
     min-width: min(500px, 95vw);
+    max-width: 1000px;
     margin: 32px auto 0;
 }
 
