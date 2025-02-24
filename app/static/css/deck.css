@@ -1,5 +1,5 @@
 .deck-column {
-    width: 95%;
+    width: 100%;
     max-width: 650px;
     margin: 0 auto;
 }
@@ -101,13 +101,11 @@ body :has(.card.flipped) .card-nav {
 }
 
 .deck-info {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 .deck-options {
-    position: absolute;
-    top: 4px;
-    right: 4px;
     color: var(--text-color);
     font-size: 1.6rem;
     display: flex;
