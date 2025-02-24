@@ -2,6 +2,7 @@ from . import app
 import random
 import zipfile
 import os
+import pyzstd
 
 def random_hex_token(length=16):
     return ''.join(random.choice('0123456789abcdef') for _ in range(length))
@@ -26,3 +27,11 @@ def unzip_file(path, zip_filename) -> None:
             if not member_path.startswith(os.path.abspath(path) + os.sep):
                 raise Exception("Unsafe file path detected")
         zip_ref.extractall(path)
+
+def decompress_pyzstd(input_path, output_path):
+    with open(input_path, 'rb') as compressed_file:
+        compressed_data = compressed_file.read()
+        decompressed_data = pyzstd.decompress(compressed_data)
+
+    with open(output_path, 'wb') as decompressed_file:
+        decompressed_file.write(decompressed_data)
