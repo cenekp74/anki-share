@@ -56,7 +56,8 @@ def process_deck(deck_id: str):
     try:
         cards = []
         for note in notes:
-            front, back = note[0].split("\x1f")
+            front = note[0].split("\x1f")[0]
+            back = note[0].split("\x1f")[1]
             cards.append({
                 "front":front,
                 "back":back,
