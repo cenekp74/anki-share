@@ -1,0 +1,42 @@
+:root {
+    --table-hover-color: hsl(100, 30%, 12%);
+}
+
+.deck-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.deck-options {
+    color: var(--text-color);
+    font-size: 1.6rem;
+    display: flex;
+    gap: 12px;
+}
+
+.deck-body {
+    display: table;
+    border-collapse: collapse;
+}
+
+.card {
+    display: table-row;
+}
+
+.card:not(:first-child) {
+    border-top: 1px solid var(--text-color);
+}
+
+.card:not(:first-child):hover {
+    background-color: var(--table-hover-color);
+}
+
+.card > div {
+    display: table-cell;
+    padding: 16px 4px;
+    vertical-align: top;
+}
+
+img {
+    max-width: 30vw;
+}

@@ -49,7 +49,7 @@ function flipCurrentCard() {
 }
 
 function updateDeckStatus() {
-    document.querySelector(".deck-status").innerHTML = `${window.currentCard+1}/${window.cards.length}`
+    document.querySelector(".deck-status").innerHTML = `Learning: ${window.currentCard+1}/${window.cards.length}`
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -84,12 +84,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
     changeCurrentCard(0)
-    document.querySelector(".share-deck-button").addEventListener("click", () => {
-        if (navigator.share) {
-            navigator.share({
-                title: `anki-share deck - ${document.querySelector(".deck-info > h1").innerHTML}`,
-                url: window.location.href
-            })
-        }
-    })
 })

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/browse-deck.css') }}?v=000">
+<title>anki-share | Browse {{ deck_name }}</title>
+<meta property="og:title" content="anki-share | Browse {{ deck_name }}">
+<meta property="og:description" content="Anki deck {{ deck_name }} | Share your anki decks with ease at anki-share.com">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="deck-column">
+    <div class="deck-info">
+        <div>
+            <h1><a href="{{ url_for('deck', deck_id=deck_id) }}">{{ deck_name }}</a></h1>
+        </div>
+        <div class="deck-options">
+            <a href="#" class="share-deck-button" title="Copy the website url to share the deck">
+                <i class="fa-solid fa-share-nodes"></i>
+            </a>
+            <a href="{{ url_for('download_deck', deck_id=deck_id) }}" class="deck-download-button" title="Download .apkg">
+                <i class="fa-solid fa-download"></i>
+            </a>
+        </div>
+    </div>
+    <div class="deck-body">
+        <div class="card" style="font-size: 1.25rem;">
+            <div><b>Front</b></div>
+            <div><b>Back</b></div>
+        </div>
+        {{ deck_body | safe }}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/browse-deck.js') }}?v=000"></script>
+{% endblock %}

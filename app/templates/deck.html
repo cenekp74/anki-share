@@ -20,6 +20,7 @@
         <div>
             <h1>{{ deck_name }}</h1>
             <div class="deck-status"></div>
+            <a href="{{ url_for('browse_deck', deck_id=deck_id) }}">Browse</a>
         </div>
         <div class="deck-options">
             <a href="#" class="share-deck-button" title="Copy the website url to share the deck">

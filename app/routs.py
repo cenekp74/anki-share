@@ -44,10 +44,10 @@ def upload():
 def deck(deck_id):
     if not is_valid_deck_id(deck_id): abort(400)
     deck = Deck.query.get(deck_id)
-    if not deck: abort(400)
+    if not deck: abort(404)
 
     deck_path = f"instance/decks/{deck.id}"
-    if not os.path.exists(deck_path): abort(400)
+    if not os.path.exists(deck_path): abort(500)
     
     status = ProcessingStatus.IN_QUEUE
     if os.path.exists(f"{deck_path}/processing_status.txt"):
@@ -72,6 +72,23 @@ def deck(deck_id):
             error = "Error while processing anki 'media' file. Please try exporting the deck with support for older versions."
         return render_template("deck.html", error=error)
     return render_template("deck.html", deck_body="Your deck is currently being processed. It should take no longer then a few minutes. Please reload to page to update.")
+
+@app.route('/deck/<deck_id>/browse')
+def browse_deck(deck_id):
+    if not is_valid_deck_id(deck_id): abort(400)
+    deck = Deck.query.get(deck_id)
+    if not deck: abort(404)
+
+    deck_path = f"instance/decks/{deck.id}"
+    if not os.path.exists(deck_path): abort(500)
+    
+    if os.path.exists(f"{deck_path}/processing_status.txt"):
+        with open(f"{deck_path}/processing_status.txt") as status_file:
+            status = ProcessingStatus(int(status_file.read()))
+    if not status is ProcessingStatus.COMPLETED: abort(400)
+    
+    deck_body = open(f"{deck_path}/deck_body.html", "r", encoding="utf-8").read()
+    return render_template("browse_deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id)
 
 @app.route('/deck/<deck_id>/download')
 def download_deck(deck_id):
