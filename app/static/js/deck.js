@@ -83,5 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 break
         }
     })
-    changeCurrentCard(0)
+    urlParams = new URLSearchParams(window.location.search);
+    firstCard = urlParams.get("card")
+    if (firstCard) {
+        firstCard = parseInt(firstCard)
+        if (!window.cards[firstCard]) {
+            firstCard = 0
+        }
+    } else {
+        firstCard = 0
+    }
+    changeCurrentCard(firstCard)
 })

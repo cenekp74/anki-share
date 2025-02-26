@@ -21,6 +21,7 @@
 
 .card {
     display: table-row;
+    cursor: pointer;
 }
 
 .card:not(:first-child) {
