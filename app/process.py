@@ -1,6 +1,6 @@
 import os
 import shutil
-from .utils import unzip_file, decompress_pyzstd
+from .utils import unzip_file, decompress_pyzstd, clean_html
 from enum import Enum
 import sqlite3
 from flask import render_template
@@ -57,10 +57,12 @@ def process_deck(deck_id: str):
         cards = []
         for note in notes:
             front = note[0].split("\x1f")[0]
+            front = clean_html(front)
             if len(note[0].split("\x1f")) == 1:
                 back = ""
             else:
                 back = note[0].split("\x1f")[1]
+                back = clean_html(back)
             cards.append({
                 "front":front,
                 "back":back,
@@ -96,7 +98,7 @@ def process_deck(deck_id: str):
     if compressed: # if the anki deck is from a newer version, the media files are copmressed using zstd
         for filename in os.listdir(f"{deck_path}/media"):
             decompress_pyzstd(f"{deck_path}/media/{filename}", f"{deck_path}/media/{filename}")
-            
+
     with open(f"{deck_path}/deck_body.html", "w", encoding="utf-8") as f:
         f.write(html)
     write_to_status_file(deck_id, ProcessingStatus.COMPLETED)

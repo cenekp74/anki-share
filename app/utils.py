@@ -3,6 +3,7 @@ import random
 import zipfile
 import os
 import pyzstd
+import nh3
 
 def random_hex_token(length=16):
     return ''.join(random.choice('0123456789abcdef') for _ in range(length))
@@ -35,3 +36,6 @@ def decompress_pyzstd(input_path, output_path):
 
     with open(output_path, 'wb') as decompressed_file:
         decompressed_file.write(decompressed_data)
+
+def clean_html(html: str):
+    return nh3.clean(html)
