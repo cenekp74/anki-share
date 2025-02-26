@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/deck.css') }}?v=001">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/deck.css') }}?v=002">
 <title>anki-share | {{ deck_name }}</title>
 <meta property="og:title" content="anki-share | {{ deck_name }}">
 <meta property="og:description" content="Anki deck {{ deck_name }} | Share your anki decks with ease at anki-share.com">
@@ -45,5 +45,5 @@
 </div>
 {% endif %}
 
-<script src="{{ url_for('static', filename='js/deck.js') }}?v=000"></script>
+<script src="{{ url_for('static', filename='js/deck.js') }}?v=001"></script>
 {% endblock %}
