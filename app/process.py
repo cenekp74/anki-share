@@ -44,6 +44,9 @@ def process_deck(deck_id: str):
     if os.path.exists(f"{deck_path}/anki/collection.anki21b"):
         decompress_pyzstd(f"{deck_path}/anki/collection.anki21b", f"{deck_path}/anki/collection.anki21")
         compressed = True
+    if not os.path.exists(f"{deck_path}/anki/collection.anki21"): # if there is no collection.anki21b and no collection.anki21 files, it means the deck is version < 2.1
+        if os.path.exists(f"{deck_path}/anki/collection.anki2"):
+            shutil.move(f"{deck_path}/anki/collection.anki2", f"{deck_path}/anki/collection.anki21")
     if not os.path.exists(f"{deck_path}/anki/collection.anki21"):
         write_to_status_file(deck_id, ProcessingStatus.ERROR_COLLECTION_ANKI21_MISSING)
         return False
