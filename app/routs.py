@@ -71,7 +71,7 @@ def deck(deck_id):
         elif status is ProcessingStatus.ERROR_PROCESSING_MEDIA_FILE:
             error = "Error while processing anki 'media' file. Please try exporting the deck with support for older versions."
         return render_template("deck.html", error=error)
-    return render_template("deck.html", deck_body="Your deck is currently being processed. It should take no longer then a few minutes. Please reload to page to update.")
+    return render_template("deck.html", deck_body="Your deck is currently being processed. It should take no longer then a few minutes. Reload the page to update. If you are stuck here, please don't hesitate and contact me at support@anki-share.com.")
 
 @app.route('/deck/<deck_id>/browse')
 def browse_deck(deck_id):
