@@ -106,3 +106,8 @@ def send_deck_media(deck_id, filename):
     deck = Deck.query.get(deck_id)
     if not deck: abort(400)
     return send_from_directory(f"../instance/decks/{deck.id}/media", filename)
+
+@app.route('/decks-index')
+def decks_index():
+    decks = Deck.query.all()
+    return render_template("decks_index.html", decks=decks)

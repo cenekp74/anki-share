@@ -1,0 +1,3 @@
+{% for deck in decks %}
+<a href="{{ url_for('deck', deck_id=deck.id) }}">{{ deck.id }}</a><br>
+{% endfor %}
