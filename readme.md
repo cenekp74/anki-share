@@ -38,3 +38,9 @@ The logic of `process_deck` function in `process.py`
 - if the deck is from new anki versions, the `media` file is serialized using protocol buffers. it has to be processed with `import_export_pb2.py`. the files in anki_proto directory have been generated using protoc (https://protobuf.dev/getting-started/pythontutorial/)
 7. move all media files to media directory and replace the references in html
 8. if the deck is from a new anki versions, the media files also have to be decompressed using `decompress_pyzstd`
+
+## db structure
+### deck
+- id - 16 characters long hexadecimal id, randomly generated
+- name - name of the deck, created from the uploaded filename
+- processed - 0 or 1, represents if the deck has been successfully processed. this is NOT by the celery task for deck processing, but by the deck function in `routs.py` if the deck was successfully loaded

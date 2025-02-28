@@ -56,6 +56,9 @@ def deck(deck_id):
 
     if status is ProcessingStatus.COMPLETED:
         deck_body = open(f"{deck_path}/deck_body.html", "r", encoding="utf-8").read()
+        if not deck.processed:
+            deck.processed = 1 # set deck.processed to 1 if not already set
+            db.session.commit()
         return render_template("deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id)
     
     if status.error():
@@ -109,5 +112,5 @@ def send_deck_media(deck_id, filename):
 
 @app.route('/decks-index')
 def decks_index():
-    decks = Deck.query.all()
+    decks = Deck.query.filter_by(processed=1)
     return render_template("decks_index.html", decks=decks)
