@@ -1,3 +1,16 @@
-{% for deck in decks %}
-<a href="{{ url_for('deck', deck_id=deck.id) }}">{{ deck.id }}</a><br>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit="no">
+    <meta name="robots" content="noindex,follow">
+</head>
+
+<body>
+    {% for deck in decks %}
+    <a href="{{ url_for('deck', deck_id=deck.id) }}">{{ deck.id }}</a><br>
+    {% endfor %}
+</body>
+</html>
