@@ -4,6 +4,8 @@ Normally, sharing decks can be quite frustrating - most people don't use anki an
 
 Anki-share takes care of this problem. You simply upload the Anki deck to https://anki-share.com/ and share the generated url with anyone. They will then be able to view the deck from any web browser - be it on a computer, tablet or mobile phone. They won't be able to use all the advance features Anki has to offer, but for a quick learning session, it's perfect!
 
+For a more detailed description of this project please visit [https://potuznik.dev/](https://potuznik.dev/projects/anki-share)
+
 ## local installation
 Data privacy may be a concern for many with service like this. If you plan on using it extensively, the best way is to run your own server. 
 
