@@ -6,6 +6,7 @@ import sqlite3
 from flask import render_template
 from app import app
 import json
+import re
 
 class ProcessingStatus(Enum):
     IN_QUEUE = 0
@@ -101,6 +102,12 @@ def process_deck(deck_id: str):
     if compressed: # if the anki deck is from a newer version, the media files are copmressed using zstd
         for filename in os.listdir(f"{deck_path}/media"):
             decompress_pyzstd(f"{deck_path}/media/{filename}", f"{deck_path}/media/{filename}")
+
+    # cloze format
+    cloze_pattern = re.compile(r"{{c\d+::(.*?)}}")
+    def replace_cloze(match):
+        return f'<span class="cloze" onclick="this.classList.toggle(\'revealed\');event.stopPropagation()">{match.group(1)}</span>'
+    html = cloze_pattern.sub(replace_cloze, html)
 
     with open(f"{deck_path}/deck_body.html", "w", encoding="utf-8") as f:
         f.write(html)

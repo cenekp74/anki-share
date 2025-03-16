@@ -81,3 +81,16 @@ footer {
     position: absolute;
     bottom: 0;
 }
+
+.cloze {
+    background-color: var(--secondary-color);
+    color: transparent;
+    cursor: pointer;
+    margin: 0 4px;
+    padding: 2px;
+    user-select: none;
+}
+
+.cloze.revealed {
+    color: var(--text-color);
+}
