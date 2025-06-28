@@ -18,7 +18,7 @@
             <small class="datetime-uploaded">Uploaded on {{ datetime_uploaded.strftime('%Y-%m-%d %H:%M') }}</small>
         </div>
         <div class="deck-options">
-            <a href="#" class="share-deck-button" title="Copy the website url to share the deck">
+            <a href="#" class="share-deck-button">
                 <i class="fa-solid fa-share-nodes"></i>
             </a>
             <a href="{{ url_for('download_deck', deck_id=deck_id) }}" class="deck-download-button" title="Download .apkg">
