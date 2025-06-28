@@ -6,6 +6,7 @@ from .celery_tasks import start_deck_processing
 import os
 from .db_classes import Deck
 from .process import ProcessingStatus
+from datetime import datetime
 
 @app.route('/favicon.ico')
 def send_favicon():
@@ -34,7 +35,8 @@ def upload():
     start_deck_processing.delay(deck_id)
     deck = Deck(
         id = deck_id,
-        name = filename.removesuffix(".apkg").replace("_", " ")
+        name = filename.removesuffix(".apkg").replace("_", " "),
+        datetime_uploaded = datetime.now(),
     )
     db.session.add(deck)
     db.session.commit()
@@ -59,7 +61,7 @@ def deck(deck_id):
         if not deck.processed:
             deck.processed = 1 # set deck.processed to 1 if not already set
             db.session.commit()
-        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id)
+        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id, datetime_uploaded=deck.datetime_uploaded)
     
     if status.error():
         error = "Unexpected server error"
@@ -91,7 +93,7 @@ def browse_deck(deck_id):
     if not status is ProcessingStatus.COMPLETED: abort(400)
     
     deck_body = open(f"{deck_path}/deck_body.html", "r", encoding="utf-8").read()
-    return render_template("browse_deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id)
+    return render_template("browse_deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id, datetime_uploaded=deck.datetime_uploaded)
 
 @app.route('/deck/<deck_id>/download')
 def download_deck(deck_id):

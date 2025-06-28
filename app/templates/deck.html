@@ -20,8 +20,8 @@
     <div class="deck-info">
         <div>
             <h1>{{ deck_name }}</h1>
-            <div class="deck-status"></div>
-            <a href="{{ url_for('browse_deck', deck_id=deck_id) }}">Browse</a>
+            <div><span class="deck-status"></span> - <b><a href="{{ url_for('browse_deck', deck_id=deck_id) }}">Browse</a></b></div>
+            <small class="datetime-uploaded">Uploaded on {{ datetime_uploaded.strftime('%Y-%m-%d %H:%M') }}</small>
         </div>
         <div class="deck-options">
             <a href="#" class="share-deck-button" title="Copy the website url to share the deck">
