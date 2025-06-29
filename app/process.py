@@ -7,6 +7,7 @@ from flask import render_template
 from app import app
 import json
 import re
+import random
 
 class ProcessingStatus(Enum):
     IN_QUEUE = 0
@@ -53,13 +54,17 @@ def process_deck(deck_id: str):
         return False
     conn = sqlite3.connect(f"{deck_path}/anki/collection.anki21")
     cur = conn.cursor()
-    notes = cur.execute("SELECT flds FROM notes")
+
+    models = json.loads(list(cur.execute("SELECT models FROM col"))[0][0]) # dict of card types (models)
+    notes = list(cur.execute("SELECT flds FROM notes"))
+    note_mids = list(cur.execute("SELECT mid FROM notes"))
     if not notes:
         write_to_status_file(deck_id, ProcessingStatus.ERROR_NOTES_MISSING)
         return False
     try:
         cards = []
-        for note in notes:
+        for (note, mid) in zip(notes, note_mids):
+            mid = mid[0]
             front = note[0].split("\x1f")[0]
             front = clean_html(front)
             if len(note[0].split("\x1f")) == 1:
@@ -71,9 +76,17 @@ def process_deck(deck_id: str):
                 "front":front,
                 "back":back,
             })
+
+            if models[str(mid)]["name"] == "Basic (and reversed card)":
+                cards.append({
+                    "front":back,
+                    "back":front,
+                })
     except Exception as _e:
         write_to_status_file(deck_id, ProcessingStatus.ERROR_PROCESSING_NOTES)
         return False
+    
+    random.shuffle(cards)
     html = render_template("deck_body.html", cards=cards)
 
     write_to_status_file(deck_id, ProcessingStatus.PROCESSING_MEDIA)
