@@ -109,6 +109,11 @@ def process_deck(deck_id: str):
         return f'<span class="cloze" onclick="this.classList.toggle(\'revealed\');event.stopPropagation()">{match.group(1)}</span>'
     html = cloze_pattern.sub(replace_cloze, html)
 
+    audio_pattern = re.compile(r"\[sound:([^\]]+)\]")
+    def replace_audio(match):
+        return f'<audio controls src="{match.group(1)}"></audio>'
+    html = audio_pattern.sub(replace_audio, html)
+
     with open(f"{deck_path}/deck_body.html", "w", encoding="utf-8") as f:
         f.write(html)
     write_to_status_file(deck_id, ProcessingStatus.COMPLETED)

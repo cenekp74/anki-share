@@ -125,3 +125,7 @@ footer {
 .cloze.revealed {
     color: var(--text-color);
 }
+
+audio {
+    padding: 0 8px;
+}
