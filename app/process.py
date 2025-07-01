@@ -82,6 +82,13 @@ def process_deck(deck_id: str):
                     "front":back,
                     "back":front,
                 })
+            if "optional reversed card" in models[str(mid)]["name"]: # if the card type has something to do with optional reversed card, the third field usually indicates whether reverse should be included
+                if len(note[0].split("\x1f")) >= 3:
+                    if "y" in note[0].split("\x1f")[2].lower():
+                        cards.append({
+                            "front":back,
+                            "back":front,
+                        })
     except Exception as _e:
         write_to_status_file(deck_id, ProcessingStatus.ERROR_PROCESSING_NOTES)
         return False
