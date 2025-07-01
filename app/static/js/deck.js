@@ -12,6 +12,9 @@ function changeCurrentCard(card_index) {
     if (!card) return
     card.classList.add("active")
     updateDeckStatus()
+    if (getCurrentCardEle().querySelector(".card-front").querySelector("audio")) {
+        getCurrentCardEle().querySelector(".card-front").querySelector("audio").play()
+    }
 }
 
 function nextCard() {
@@ -46,6 +49,15 @@ function incorrect() {
 
 function flipCurrentCard() {
     getCurrentCardEle().classList.toggle("flipped")
+    if (getCurrentCardEle().classList.contains("flipped")) {
+        if (getCurrentCardEle().querySelector(".card-back").querySelector("audio")) {
+            getCurrentCardEle().querySelector(".card-back").querySelector("audio").play()
+        }
+    } else {
+        if (getCurrentCardEle().querySelector(".card-front").querySelector("audio")) {
+            getCurrentCardEle().querySelector(".card-front").querySelector("audio").play()
+        }
+    }
 }
 
 function updateDeckStatus() {
