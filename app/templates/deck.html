@@ -21,7 +21,9 @@
         <div>
             <h1>{{ deck_name }}</h1>
             <div><span class="deck-status"></span> - <b><a href="{{ url_for('browse_deck', deck_id=deck_id) }}">Browse</a></b></div>
+            {% if datetime_uploaded is defined %}
             <small class="datetime-uploaded">Uploaded on {{ datetime_uploaded.strftime('%Y-%m-%d %H:%M') }}</small>
+            {% endif %}
         </div>
         <div class="deck-options">
             <a href="#" class="share-deck-button">
