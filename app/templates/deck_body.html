@@ -1,6 +1,6 @@
 {% for card in cards %}
 <div class="card" id="card-{{ loop.index }}">
-    <div class="card-front">{{ card.front | safe }}</div>
-    <div class="card-back">{{ card.back | safe }}</div>
+    <div class="card-front"><div>{{ card.front | safe }}</div></div>
+    <div class="card-back"><div>{{ card.back | safe }}</div></div>
 </div>
 {% endfor %}

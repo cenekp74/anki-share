@@ -58,10 +58,9 @@
 }
 
 .card img {
-    max-height: 96%;
-    max-width: 96%;
-    height: auto;
     width: auto;
+    max-height: 38vh;
+    max-width: 100%;
 }
 
 .deck-nav {
