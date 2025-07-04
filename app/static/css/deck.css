@@ -111,3 +111,15 @@ body :has(.card.flipped) .card-nav {
     display: flex;
     gap: 12px;
 }
+
+.shuffle-button {
+    position: absolute;
+    font-size: 1.6rem;
+    right: 0;
+    top: -20px;
+}
+
+.shuffle-button:hover {
+    cursor: pointer;
+    color: var(--link-hover-color);
+}

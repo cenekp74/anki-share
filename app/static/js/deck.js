@@ -64,6 +64,15 @@ function updateDeckStatus() {
     document.querySelector(".deck-status").innerHTML = `Learning: ${window.currentCard+1}/${window.cards.length}`
 }
 
+function shuffle() {
+    if (getCurrentCardEle()) {
+        getCurrentCardEle().classList.remove("active")
+        getCurrentCardEle().classList.remove("flipped")
+    }
+    shuffleArray(window.cards)
+    changeCurrentCard(0)
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     window.cards = []
     document.querySelectorAll(".card").forEach((cardEle) => {
@@ -74,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".prev-button").addEventListener("click", prevCard)
     document.querySelector(".correct-button").addEventListener("click", correct)
     document.querySelector(".incorrect-button").addEventListener("click", incorrect)
+    document.querySelector(".shuffle-button").addEventListener("click", shuffle)
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
             case "ArrowLeft":

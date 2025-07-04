@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/deck.css') }}?v=003">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/deck.css') }}?v=004">
 <title>anki-share | {{ deck_name }}</title>
 <meta property="og:title" content="anki-share | {{ deck_name }}">
 <meta property="og:description" content="Anki deck {{ deck_name }} | Share your anki decks with ease at anki-share.com">
@@ -20,7 +20,10 @@
     <div class="deck-info">
         <div>
             <h1>{{ deck_name }}</h1>
-            <div><span class="deck-status"></span> - <b><a href="{{ url_for('browse_deck', deck_id=deck_id) }}">Browse</a></b></div>
+            <div>
+                <span class="deck-status"></span> - 
+                <b><a href="{{ url_for('browse_deck', deck_id=deck_id) }}">Browse</a></b>
+            </div>
             {% if datetime_uploaded is defined %}
             <small class="datetime-uploaded">Uploaded on {{ datetime_uploaded.strftime('%Y-%m-%d %H:%M') }}</small>
             {% endif %}
@@ -35,6 +38,7 @@
         </div>
     </div>
     <div class="deck-body" title="Flip card">
+        <i class="fa-solid fa-shuffle shuffle-button" title="Shuffle cards"></i>
         {{ deck_body | safe }}
     </div>
     <div class="deck-nav">
@@ -48,7 +52,7 @@
 </div>
 {% endif %}
 
-<script src="{{ url_for('static', filename='js/deck.js') }}?v=002"></script>
+<script src="{{ url_for('static', filename='js/deck.js') }}?v=003"></script>
 {% endblock %}
 
 {% block footer %}

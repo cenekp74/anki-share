@@ -26,6 +26,16 @@ function showFlashAlert(message, category='', timeout=5000) {
     }, timeout*2/3)
 }
 
+/** used by deck.js to shuffle cards */
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
 if (document.querySelector(".share-deck-button")) {
     document.querySelector(".share-deck-button").addEventListener("click", () => {
         if (navigator.share) {
