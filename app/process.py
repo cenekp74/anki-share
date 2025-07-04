@@ -63,6 +63,7 @@ def process_deck(deck_id: str):
         return False
     try:
         cards = []
+        reversed_cards = [] # separate list that will be appended to the end of cards
         for (note, mid) in zip(notes, note_mids):
             mid = mid[0]
             front = note[0].split("\x1f")[0]
@@ -78,22 +79,22 @@ def process_deck(deck_id: str):
             })
 
             if models[str(mid)]["name"] == "Basic (and reversed card)":
-                cards.append({
+                reversed_cards.append({
                     "front":back,
                     "back":front,
                 })
             if "optional reversed card" in models[str(mid)]["name"]: # if the card type has something to do with optional reversed card, the third field usually indicates whether reverse should be included
                 if len(note[0].split("\x1f")) >= 3:
                     if "y" in note[0].split("\x1f")[2].lower():
-                        cards.append({
+                        reversed_cards.append({
                             "front":back,
                             "back":front,
                         })
+        cards += reversed_cards
     except Exception as _e:
         write_to_status_file(deck_id, ProcessingStatus.ERROR_PROCESSING_NOTES)
         return False
     
-    random.shuffle(cards)
     html = render_template("deck_body.html", cards=cards)
 
     write_to_status_file(deck_id, ProcessingStatus.PROCESSING_MEDIA)
