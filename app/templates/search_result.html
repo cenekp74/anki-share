@@ -1,0 +1,24 @@
+{% for deck in results %}
+<a class="deck-box" href="{{ url_for('deck', deck_id=deck.id) }}">
+    <div>
+        <div class="deck-name">{{ deck.name | safe}}</div>
+        <div class="deck-details">
+            <small>Uploaded: {{ deck.datetime_uploaded.date() }}</small>
+        </div>
+    </div>  
+</a>
+{% endfor %}
+
+{% if results %}
+<script>
+    nor = document.getElementById('no-results');
+    nor.style.visibility = 'hidden';
+</script>
+{% else %}
+{% if q %}
+<script>
+    nor = document.getElementById('no-results');
+    nor.style.visibility = 'visible';
+</script>
+{% endif %}
+{% endif %}

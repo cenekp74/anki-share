@@ -146,3 +146,18 @@ def send_deck_media(deck_id, filename):
 def decks_index():
     decks = Deck.query.filter_by(processed=1)
     return render_template("decks_index.html", decks=decks)
+
+@app.route('/browse')
+def browse():
+    return render_template("browse.html")
+
+@app.route('/search-query', methods=["POST"])
+def search_query():
+    q = request.form['q'].lower()
+    results = set()
+    if q:
+        results.update(Deck.query.filter_by(published=1).filter(Deck.name.icontains(q)))
+    else:
+        results.update(Deck.query.filter_by(published=1).all())
+
+    return render_template('search_result.html', results=results, q=q)

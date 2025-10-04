@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/browse.css') }}?v=001">
+<title>anki-share | {{ deck_name }}</title>
+<meta property="og:title" content="anki-share | Browse decks">
+<meta property="og:description" content="anki-share | Browse decks uploaded by users">
+<meta name="description" content="anki learning flashcards - {{ deck_name }}">
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+{% endblock %}
+
+
+{% block body %}
+
+<h1>Browse decks</h1>
+<form hx-post="{{ url_for('search_query') }}" class="search-bar" hx-target="#search-results" hx-indicator="#spinner" hx-trigger="submit, load">
+    <input type="text" class="search-input" name="q">
+    <button class="fa fa-search" type="submit"></button>    
+</form>
+
+<span id="no-results" style="visibility: hidden;">No results</span>
+<img id="spinner" class="indicator" src="{{ url_for('static', filename='img/spinner.svg') }}">
+<div id="search-results" class="items-container items-container-full">
+
+{% endblock %}
