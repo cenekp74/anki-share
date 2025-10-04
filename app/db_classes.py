@@ -5,3 +5,5 @@ class Deck(db.Model):
     name = db.Column(db.String, nullable=False)
     processed = db.Column(db.Integer, default=0, nullable=False)
     datetime_uploaded = db.Column(db.DateTime, nullable=False)
+    user_secret = db.Column(db.String)
+    published = db.Column(db.Integer, default=0, nullable=False)
