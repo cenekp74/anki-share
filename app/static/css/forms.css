@@ -1,0 +1,104 @@
+.container-form {
+    width: 70%;
+    min-width: 320px;
+    max-width: 500px;
+    margin-top: 40px;
+    background-color: var(--form-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+}
+
+form {
+    margin-top: 24px;
+    font-family: 'Roboto';
+}
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+legend {
+    border-bottom: 1px solid var(--text-color);
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: calc(1.275rem + .3vw);
+    line-height: inherit;
+}
+
+label {
+    font-size: 110%;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    background-color: var(--form-field-color);
+    border: 1px var(--bg-color) solid;
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+}
+
+select {
+    background-color: var(--form-field-color);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--disabled-text-color);
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+input.form-control, input.form-input {
+    width: 100%;
+    background-color: var(--form-field-color);
+    color: var(--text-color);
+    border: none;
+    height: 2rem;
+    border-radius: calc(var(--border-radius) - 5px);
+    text-indent: 4px;
+    font-size: 100%;
+    margin-top: 4px;
+}
+
+input[type='checkbox'].form-control {
+    width: unset;
+    height: 16px;
+}
+
+input.invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+}
+
+.form-check-input {
+    margin-left: 0;
+}
+
+.form-check label {
+    font-size: 90%;
+}
+
+.form-submit {
+    margin-top: 8px;
+    width: 128px;
+    height: 32px;
+    margin-bottom: 4px;
+    color: var(--text-color);
+    border-radius: calc(var(--border-radius) - 5px);
+    background-color: var(--form-field-color);
+    border: none;
+    transition: .05s;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-submit:hover {
+    background-color: var(--button-hover-color);
+    cursor: pointer;
+    outline: 1px solid var(--text-color);
+}

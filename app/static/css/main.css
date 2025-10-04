@@ -17,6 +17,7 @@ margin: 0;
     --link-color: hsl(220, 20%, 90%);
     --link-hover-color: hsl(220, 60%, 70%);
     --alert-success-color: lightgreen;
+    --form-field-color: hsl(100, 40%, 14%);
 }
 
 body {
