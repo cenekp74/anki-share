@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/deck.css') }}?v=004">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}?v=001">
 <title>anki-share | {{ deck_name }}</title>
 <meta property="og:title" content="anki-share | {{ deck_name }}">
 <meta property="og:description" content="Anki deck {{ deck_name }} | Share your anki decks with ease at anki-share.com">
@@ -49,10 +50,32 @@
         </div>
         <div class="next-button button" title="Next card"><i class="fa-solid fa-arrow-right"></i></div>
     </div>
+
+    {% if owner %}
+    <div>
+        <form action="{{ url_for('edit_deck', deck_id=deck_id) }}" method="post">
+            <fieldset class="form-group">
+                <legend>Edit deck</legend>
+                <input type="hidden" name="user_secret" id="user_secret_input">
+                <div class="form-group">
+                    <label class="form-control-label" for="name">Name: </label>
+                    <input class="form-control" name="name" value="{{ deck_name }}">
+                </div>
+                <div class="form-group">
+                    <input id="publish" class="form-control" name="publish" type="checkbox" value="publish" {{ "checked" if deck.published }}>
+                    <label class="form-control-label" for="publish" title="If the deck is published, it can show in search results">Publish my deck</label>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <input class="form-submit" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    {% endif %}
 </div>
 {% endif %}
 
-<script src="{{ url_for('static', filename='js/deck.js') }}?v=003"></script>
+<script src="{{ url_for('static', filename='js/deck.js') }}?v=004"></script>
 {% endblock %}
 
 {% block footer %}

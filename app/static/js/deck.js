@@ -116,4 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
         firstCard = 0
     }
     changeCurrentCard(firstCard)
+    const userSecret = localStorage.getItem("user_secret");
+    document.getElementById("user_secret_input").value = userSecret;
 })

@@ -37,6 +37,7 @@ def upload():
         id = deck_id,
         name = filename.removesuffix(".apkg").replace("_", " "),
         datetime_uploaded = datetime.now(),
+        user_secret = request.headers.get("X-User-Secret"),
     )
     db.session.add(deck)
     db.session.commit()
@@ -61,7 +62,11 @@ def deck(deck_id):
         if not deck.processed:
             deck.processed = 1 # set deck.processed to 1 if not already set
             db.session.commit()
-        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id, datetime_uploaded=deck.datetime_uploaded)
+        user_secret = request.cookies.get("user_secret")
+        owner = False
+        if user_secret and (user_secret == deck.user_secret):
+            owner = True
+        return render_template("deck.html", deck_body=deck_body, deck_name=deck.name, deck_id=deck_id, datetime_uploaded=deck.datetime_uploaded, deck=deck, owner=owner)
     
     if status.error():
         error = "Unexpected server error"
@@ -104,6 +109,31 @@ def download_deck(deck_id):
     deck_path = f"instance/decks/{deck.id}"
     if not os.path.exists(f"{deck_path}/anki/deck.apkg"): abort(400)
     return send_file(f"../{deck_path}/anki/deck.apkg", download_name=f"{deck.name}.apkg")
+
+@app.route('/deck/<deck_id>/edit', methods=["POST"])
+def edit_deck(deck_id):
+    if not is_valid_deck_id(deck_id): abort(400)
+    deck = Deck.query.get(deck_id)
+    if not deck: abort(400)
+
+    user_secret = request.form.get("user_secret")
+    if not user_secret or not deck.user_secret:
+        abort(403)
+    if user_secret != deck.user_secret:
+        abort(403)
+
+    name = request.form.get("name")
+    publish = request.form.get("publish")
+    if name:
+        deck.name = name
+    if publish:
+        deck.published = 1
+    else:
+        deck.published = 0
+    db.session.commit()
+
+    return redirect(url_for('deck', deck_id=deck_id))
+
 
 @app.route('/deck/<deck_id>/media/<filename>')
 def send_deck_media(deck_id, filename):
