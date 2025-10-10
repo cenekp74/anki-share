@@ -133,7 +133,7 @@ button.fa-search:hover {
     border-radius: var(--border-radius);
     width: 45%;
     text-decoration: none;
-    height: 84px;
+    min-height: 84px;
     transition: .1s;
 }
 
@@ -146,6 +146,7 @@ button.fa-search:hover {
 
 .deck-box .deck-name {
     font-size: 1.7rem;
+    margin-bottom: 24px;
 }
 
 .deck-box .deck-details {
