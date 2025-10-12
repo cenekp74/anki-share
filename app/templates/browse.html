@@ -12,7 +12,10 @@
 
 {% block body %}
 
-<h1>Browse decks</h1>
+<h1>Shared Decks</h1>
+<p>
+    Browse or search <b>Anki decks</b> uploaded by others
+</p>
 <form hx-post="{{ url_for('search_query') }}" class="search-bar" hx-target="#search-results" hx-indicator="#spinner" hx-trigger="submit, load">
     <input type="text" class="search-input" name="q">
     <button class="fa fa-search" type="submit"></button>    
