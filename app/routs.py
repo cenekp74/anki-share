@@ -159,5 +159,6 @@ def search_query():
         results.update(Deck.query.filter_by(published=1).filter(Deck.name.icontains(q)))
     else:
         results.update(Deck.query.filter_by(published=1).all())
+    results = sorted(results, key=lambda d: d.datetime_uploaded, reverse=True)
 
     return render_template('search_result.html', results=results, q=q)
