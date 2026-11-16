@@ -7,6 +7,10 @@
 <meta property="og:title" content="anki-share | {{ deck_name }}">
 <meta property="og:description" content="Anki deck {{ deck_name }} | Share your anki decks with ease at anki-share.com">
 <meta name="description" content="anki learning flashcards - {{ deck_name }}">
+{% if "\\(" in deck_body or "\\[" in deck_body %} <!-- math equations - only loaded if the deck contains them -->
+<script>MathJax = { tex: { displayMath: [["\\[", "\\]"]] } }</script> <!-- same delimiters as anki: \(inline\) and \[display\] -->
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.js"></script>
+{% endif %}
 {% endblock %}
 
 
