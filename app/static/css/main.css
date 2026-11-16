@@ -135,6 +135,19 @@ footer {
     color: var(--text-color);
 }
 
+.cloze-hint {
+    color: var(--text-color);
+    font-style: italic;
+}
+
+.cloze-answer, .cloze.revealed .cloze-hint {
+    display: none;
+}
+
+.cloze.revealed .cloze-answer {
+    display: inline;
+}
+
 audio {
     padding: 0 8px;
 }

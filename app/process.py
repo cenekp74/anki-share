@@ -125,9 +125,12 @@ def process_deck(deck_id: str):
             decompress_pyzstd(f"{deck_path}/media/{filename}", f"{deck_path}/media/{filename}")
 
     # cloze format
-    cloze_pattern = re.compile(r"{{c\d+::(.*?)}}")
+    cloze_pattern = re.compile(r"{{c\d+::(.*?)(?:::(.*?))?}}") # {{c1::answer}} or {{c1::answer::hint}}
     def replace_cloze(match):
-        return f'<span class="cloze" onclick="this.classList.toggle(\'revealed\');event.stopPropagation()">{match.group(1)}</span>'
+        answer, hint = match.group(1), match.group(2)
+        if hint: # the hint is shown until the cloze is revealed
+            answer = f'<span class="cloze-hint">{hint}</span><span class="cloze-answer">{answer}</span>'
+        return f'<span class="cloze" onclick="this.classList.toggle(\'revealed\');event.stopPropagation()">{answer}</span>'
     html = cloze_pattern.sub(replace_cloze, html)
 
     audio_pattern = re.compile(r"\[sound:([^\]]+)\]")

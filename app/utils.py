@@ -37,5 +37,17 @@ def decompress_pyzstd(input_path, output_path):
     with open(output_path, 'wb') as decompressed_file:
         decompressed_file.write(decompressed_data)
 
+ALLOWED_STYLE_PROPERTIES = {
+    "color", "background-color", "font-size", "font-weight", "font-style",
+    "font-family", "text-decoration", "text-align",
+}
+
 def clean_html(html: str):
-    return nh3.clean(html)
+    """
+    sanitizes card html. inline styles are kept, but only the properties in ALLOWED_STYLE_PROPERTIES
+    """
+    return nh3.clean(
+        html,
+        attributes={**nh3.ALLOWED_ATTRIBUTES, "*": {"style"}},
+        filter_style_properties=ALLOWED_STYLE_PROPERTIES,
+    )
